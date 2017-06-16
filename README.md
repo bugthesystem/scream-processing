@@ -1,5 +1,18 @@
 # scream-processing
- Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
+Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
+
+## Tech / Tools
+- [Scala](https://www.scala-lang.org/)
+- [Sbt](http://www.scala-sbt.org/)
+- [Kafka](https://kafka.apache.org/)
+- [Flink](https://flink.apache.org/)
+  - [FlinkCEP - Complex event processing for Flink](https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/libs/cep.html)
+  - [FlinkML - FlinkML - Machine Learning for Flink](https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/libs/ml/index.html)
+- [Elasticsearch](https://www.elastic.co/products/elasticsearch)
+- [Kibana](https://www.elastic.co/products/kibana)
+- [Docker](https://www.docker.com/)
+
+**_Kubernetes setup will be explained later on_**
 
 ## Install Kafka
 ```sh
