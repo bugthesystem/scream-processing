@@ -29,15 +29,40 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic scilink 
 
 ## Install Flink
 ```sh
-#TODO
+wget http://mirror.netinch.com/pub/apache/flink/flink-1.3.0/flink-1.3.0-bin-hadoop27-scala_2.11.tgz
+
+tar xzf flink-*.tgz   # Unpack the downloaded archive
+cd flink-1.3.0
+
+# Start Flink
+./bin/start-local.sh
 ```
 
 ## Install ES/Kibana
 ```sh
-#TODO
+# I don't need to Logstash but we can use `docker-elk` for playground
+# ES/Kibana docker-compose and kubernetes setup will be provided
+
+git clone git@github.com:deviantony/docker-elk.git
+cd docker-elk
+docker-compose up
 ```
 
 ## Setup Project /w sbt
 ```sh
-#TODO
+# Run following script ot clone starter repo
+bash <(curl https://flink.apache.org/q/sbt-quickstart.sh)
+
+#or
+git clone https://github.com/tillrohrmann/flink-project.git your-project-name-here
+```
+
+## Project structure and dependencies
+```scala
+ // `flink-scala` and `flink-streaming-scala` will be pre-configured
+"org.apache.flink" %% "flink-scala" % flinkVersion % "provided",
+"org.apache.flink" %% "flink-streaming-scala" % flinkVersion % "provided",
+
+ // Add `flink-connector-kafka` to dependencies
+ "org.apache.flink" %% "flink-connector-kafka" % "0.10.2" % "provided"
 ```
