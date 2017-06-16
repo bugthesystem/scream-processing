@@ -77,5 +77,5 @@ git clone https://github.com/tillrohrmann/flink-project.git your-project-name-he
 "org.apache.flink" %% "flink-streaming-scala" % flinkVersion % "provided",
 
  // Add `flink-connector-kafka` to dependencies
- "org.apache.flink" %% "flink-connector-kafka" % "0.10.2" % "provided"
+ "org.apache.flink" % "flink-connector-kafka-0.10_2.10" % "1.3.0"
 ```
