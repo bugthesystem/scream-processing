@@ -1,7 +1,12 @@
 # scream-processing
 Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
 
-## Tech / Tools
+# Contents
+ - [Tech / Tools](#tech-tools)
+ - [Env Setup (Docker Compose)](#)
+ - [Env Setup (Kubernetes)](#)
+
+# Tech / Tools
 - [Scala](https://www.scala-lang.org/)
 - [Sbt](http://www.scala-sbt.org/)
 - [Kafka](https://kafka.apache.org/)
@@ -15,9 +20,12 @@ Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
 
 **_Kubernetes setup will be explained later on_**
 
-# Local Setup
+
+
+# Env Setup (Docker Compose)
 ## Install Kafka
 ```sh
+# TODO: convert to `docker-compose`
 wget http://mirror.netinch.com/pub/apache/kafka/0.10.2.0/kafka_2.11-0.10.2.0.tgz
 
 tar -xzf kafka_2.11-0.10.2.0.tgz
@@ -51,6 +59,11 @@ cd flink-1.3.0
 
 # Start Flink
 ./bin/start-local.sh
+
+#OR
+docker pull flink
+
+docker run -t -p 8081:8081 flink local
 ```
 
 ## Install ES/Kibana
@@ -63,7 +76,7 @@ cd docker-elk
 docker-compose up
 ```
 
-# Kubernetes
+# Env Setup (Kubernetes)
 ```sh
 # TODO
 ```
