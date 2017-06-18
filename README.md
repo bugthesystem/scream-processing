@@ -11,6 +11,7 @@ Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
 - [Elasticsearch](https://www.elastic.co/products/elasticsearch)
 - [Kibana](https://www.elastic.co/products/kibana)
 - [Docker](https://www.docker.com/)
+- [Kubernetes](https://kubernetes.io/)
 
 **_Kubernetes setup will be explained later on_**
 
