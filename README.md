@@ -15,6 +15,7 @@ Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
 
 **_Kubernetes setup will be explained later on_**
 
+# Local Setup
 ## Install Kafka
 ```sh
 wget http://mirror.netinch.com/pub/apache/kafka/0.10.2.0/kafka_2.11-0.10.2.0.tgz
@@ -61,6 +62,13 @@ git clone git@github.com:deviantony/docker-elk.git
 cd docker-elk
 docker-compose up
 ```
+
+# Kubernetes
+```sh
+# TODO
+```
+
+# Project Setup
 
 ## Setup Project /w sbt
 ```sh
