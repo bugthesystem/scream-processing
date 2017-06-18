@@ -1,4 +1,4 @@
-# scream-processing
+# Haymaker
 Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
 
 # Contents
