@@ -2,9 +2,9 @@
 Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
 
 # Contents
- - [Tech / Tools](#tech-tools)
- - [Env Setup (Docker Compose)](#)
- - [Env Setup (Kubernetes)](#)
+ - [Tech / Tools](#tech--tools)
+ - [Env Setup (Docker Compose)](#env-setup-docker-compose)
+ - [Env Setup (Kubernetes)](#env-setup-kubernetes)
 
 # Tech / Tools
 - [Scala](https://www.scala-lang.org/)
