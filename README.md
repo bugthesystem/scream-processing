@@ -1,5 +1,13 @@
 # Scream processing (Patoz)
 Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
+ _ _ _ _ _ _ _ _                _ _ _ _         _ _ _ _ _ _ _ _
+/         Akka   \             /        \      /                \
+|   Vert.x       |             | Flink  |      | Elasticsearch   |
+|                |             |        |      |   _ _ _ _ _ _   |
+|       Node.js  | -- Kafka ---|   Job  | ---- |  |x          |  |
+|   Spring       |             | Job    |      |  |   Kibana  |  |
+|      .NET Core |             |   Job  |      |  |_ _ _ _ _ _|  |
+\_ _ _ _ _ _ __ /              \ _ _ _ _/      \ _ _ _ _ _ _ _ _/
 
 # Contents
  - [Tech / Tools](#tech--tools)
