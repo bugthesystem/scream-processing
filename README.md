@@ -1,4 +1,4 @@
-# Patoz
+# Scream processing (Patoz)
 Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
 
 # Contents
