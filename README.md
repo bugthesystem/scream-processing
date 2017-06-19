@@ -9,7 +9,7 @@ Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
 |       Node.js  | -- Kafka ---|   Job  | ---- |  |x          |  |
 |   Spring       |             | Job    |      |  |   Kibana  |  |
 |      .NET Core |             |   Job  |      |  |_ _ _ _ _ _|  |
-\_ _ _ _ _ _ __ /              \ _ _ _ _/      \ _ _ _ _ _ _ _ _/
+\_ _ _ _ _ _ __ /              \ _ _ _ _/      \ _ _ _ _ _ _ _ _ /
 
 ```
 
