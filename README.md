@@ -67,13 +67,15 @@ docker run -t -p 8081:8081 flink local
 ```
 
 ## Install ES/Kibana
-```sh
-# I don't need to Logstash but we can use `docker-elk` for playground
-# ES/Kibana docker-compose and kubernetes setup will be provided
+:warning: `Flink Elasticsearch connector` for `Elasticsearch 5` is missing in `Maven` repository atm.
 
-git clone git@github.com:deviantony/docker-elk.git
-cd docker-elk
-docker-compose up
+```sh
+#Elasticsearch 2.4.5
+docker run --name sclink-elasticsearch -p 9200:9200 -p 9300:9300 \
+           -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" -d elasticsearch:2.4.5
+
+# Kibana 4.6.4
+docker run --name scilink-kibana --link sclink-elasticsearch:elasticsearch -p 5601:5601 -d kibana:4.6.4
 ```
 
 # Env Setup (Kubernetes)
@@ -93,11 +95,24 @@ git clone https://github.com/tillrohrmann/flink-project.git your-project-name-he
 ```
 
 ## Project structure and dependencies
+### SBT build file
 ```scala
- // `flink-scala` and `flink-streaming-scala` will be pre-configured
-"org.apache.flink" %% "flink-scala" % flinkVersion % "provided",
-"org.apache.flink" %% "flink-streaming-scala" % flinkVersion % "provided",
+ scalaVersion in ThisBuild := "2.11.7"
 
- // Add `flink-connector-kafka` to dependencies
- "org.apache.flink" % "flink-connector-kafka-0.10_2.10" % "1.3.0"
+val flinkVersion = "1.3.0"
+
+val flinkDependencies = Seq(
+  "org.apache.flink" %% "flink-scala" % flinkVersion % "provided",
+  "org.apache.flink" %% "flink-streaming-scala" % flinkVersion % "provided",
+  "org.apache.flink" % "flink-connector-elasticsearch2_2.10" % flinkVersion,
+  "org.apache.flink" % "flink-connector-kafka-0.10_2.10" % flinkVersion
+)
+
+// Joda time. (HACK)
+assemblyMergeStrategy in assembly := {
+  case PathList("org", "joda", "time", "base", "BaseDateTime.class") => MergeStrategy.first
+  case x =>
+    val oldStrategy = (assemblyMergeStrategy in assembly).value
+    oldStrategy(x)
+}
 ```
