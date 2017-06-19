@@ -1,5 +1,5 @@
 # Scream processing (Patoz)
-Playground for Kafka Flink (CEP&amp; ML) Elasticsearch Kibana in Scala
+Playground for Apache Kafka, Apache Flink (CEP, ML) Elasticsearch and Kibana in Scala
 
 ```sh
  _ _ _ _ _ _ _ _                _ _ _ _         _ _ _ _ _ _ _ _
