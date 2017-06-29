@@ -128,3 +128,16 @@ assemblyMergeStrategy in assembly := {
     oldStrategy(x)
 }
 ```
+
+### CI
+**Jenkinsfile will be shared soon**
+
+- Build Job
+- Run tests (using embedded kafka and embedded elasticsearch in my case)
+- Filter running jobs to get `current job id` using `Flink REST API`
+```sh
+curl http://localhost:8081 | ./jq '.jobs[] | select(.name == "Awesome Job") | .jid'
+```
+- Cancel job with savepoint
+- Upload new `{Your Job name-version}.jar`
+- Run newly uploaded job by starting from previously saved savepoint
