@@ -2,14 +2,14 @@
 Playground for Apache Kafka, Apache Flink (CEP, ML) Elasticsearch and Kibana in Scala
 
 ```sh
- _ _ _ _ _ _ _ _                _ _ _ _         _ _ _ _ _ _ _ _
-/         Akka   \             /        \      /                \
-|   Vert.x       |             | Flink  |      | Elasticsearch   |
-|                |             |        |      |   _ _ _ _ _ _   |
-|       Node.js  | -- Kafka ---|   Job  | ---- |  |x          |  |
-|   Spring       |             | Job    |      |  |   Kibana  |  |
-|      .NET Core |             |   Job  |      |  |_ _ _ _ _ _|  |
-\_ _ _ _ _ _ __ /              \ _ _ _ _/      \ _ _ _ _ _ _ _ _ /
+ _ _ _ _ _ _ _ _                _ _ _ _           _ _ _ _ _ _ _         _ _ _ _ _ _ 
+/         Akka   \             /        \        /               \     |x          |
+|   Vert.x       |             | Flink  |    _ _ | Elasticsearch | --- |  Kibana   |
+|                |             |        |   /    \ _ _ _ _ _ _ _ /     |_ _ _ _ _ _|
+|       Node.js  | -- Kafka ---|   Job  | /       _ _ _ _ _ _ _   
+|   Spring Boot  |             | Job    | \      /              \      _ _ _ _ _ _  
+|      .NET Core |             |   Job  |   \ _ _|    Kafka     | -- / Other apps  \
+\_ _ _ _ _ _ __ /              \ _ _ _ _/        \ _ _ _ _ _ _ _/    \ _ _ _ _ _ _ /
 
 ```
 
@@ -51,15 +51,15 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 bin/kafka-server-start.sh config/server.properties
 
 # Create topic
-bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic scilink
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic scream-processing
 
 # 
 # To send message
 #
-bin/kafka-console-producer.sh --broker-list localhost:9092 --topic scilink
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic scream-processing
 
 # To consume message
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic scilink --from-beginning
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic scream-processing --from-beginning
 ```
 
 ## Install Flink
@@ -83,11 +83,11 @@ docker run -t -p 8081:8081 flink local
 
 ```sh
 #Elasticsearch 2.4.5
-docker run --name sclink-elasticsearch -p 9200:9200 -p 9300:9300 \
+docker run --name scream-processing-elasticsearch -p 9200:9200 -p 9300:9300 \
            -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" -d elasticsearch:2.4.5
 
 # Kibana 4.6.4
-docker run --name scilink-kibana --link sclink-elasticsearch:elasticsearch -p 5601:5601 -d kibana:4.6.4
+docker run --name scream-processing-kibana --link scream-processing-elasticsearch:elasticsearch -p 5601:5601 -d kibana:4.6.4
 ```
 
 # Env Setup (Kubernetes)
