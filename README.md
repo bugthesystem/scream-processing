@@ -29,6 +29,7 @@ Playground for Apache Kafka, Apache Flink (CEP, ML) Elasticsearch and Kibana in 
 - [Kibana](https://www.elastic.co/products/kibana)
 - [Docker](https://www.docker.com/)
 - [Kubernetes](https://kubernetes.io/)
+- [Jenkins Pipelines](https://jenkins.io/doc/book/pipeline/)
 
 **_Kubernetes setup will be explained later on_**
 
