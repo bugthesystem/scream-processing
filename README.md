@@ -92,7 +92,34 @@ docker run --name scream-processing-kibana --link scream-processing-elasticsearc
 
 # Env Setup (Kubernetes)
 ```sh
-# TODO
+# clone docker-flink/examples repo
+git clone git@github.com:docker-flink/examples.git
+ 
+cd docker-flink
+ 
+# Build the Helm archive:
+helm package helm/flink/
+ 
+# Deploy a non-HA Flink cluster with a single taskmanager:
+helm install --name my-cluster flink*.tgz
+ 
+# Deploy a non-HA Flink cluster with three taskmanagers:
+helm install --name my-cluster --set flink.num_taskmanagers=3 flink*.tgz
+ 
+# Deploy an HA Flink cluster with three taskmanagers:
+cat > values.yaml <<EOF
+flink:
+  num_taskmanagers: 3
+  highavailability:
+    enabled: true
+    zookeeper_quorum: <zookeeper quorum string>
+    state_s3_bucket: <s3 bucket>
+    aws_access_key_id: <aws access key>
+    aws_secret_access_key: <aws secret key>
+EOF
+ 
+# use modified values.yaml
+helm install --name my-cluster --values values.yaml flink*.tgz
 ```
 
 # Project Setup
@@ -128,6 +155,19 @@ assemblyMergeStrategy in assembly := {
     oldStrategy(x)
 }
 ```
+
+### Testing
+
+- [x] Test Base using `LocalFlinkMiniCluster`
+
+#### Unit testing
+- [x] Mocking Data Source from collection with  timestamp assigner
+- [x] Mocking Sink to store data and get back when processing completed
+
+#### Integration Testing
+_Kafka as datasource and Elasticsearch for output_
+- EmbeddedKafka
+- Embedded Elasticsearch (Test helpers will be provided)
 
 ### CI
 **Jenkinsfile will be shared soon**
