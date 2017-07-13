@@ -92,6 +92,8 @@ docker run --name scream-processing-kibana --link scream-processing-elasticsearc
 ```
 
 # Env Setup (Kubernetes)
+
+## Flink
 ```sh
 # clone docker-flink/examples repo
 git clone git@github.com:docker-flink/examples.git
@@ -100,12 +102,15 @@ cd docker-flink
  
 # Build the Helm archive:
 helm package helm/flink/
- 
+
+# Create namespace for `flink`
+kubectl create ns flink
+
 # Deploy a non-HA Flink cluster with a single taskmanager:
-helm install --name my-cluster flink*.tgz
+helm install --name scream-processing-flink  --set global.namespace=flink flink*.tgz
  
 # Deploy a non-HA Flink cluster with three taskmanagers:
-helm install --name my-cluster --set flink.num_taskmanagers=3 flink*.tgz
+helm install --name scream-processing-flink --set flink.num_taskmanagers=3 --set global.namespace=flink flink*.tgz
  
 # Deploy an HA Flink cluster with three taskmanagers:
 cat > values.yaml <<EOF
@@ -120,41 +125,39 @@ flink:
 EOF
  
 # use modified values.yaml
-helm install --name my-cluster --values values.yaml flink*.tgz
+helm install --name scream-processing-flink --set global.namespace=flink --values values.yaml flink*.tgz
+```
+
+## Kafka
+```sh
+# Add helm repo
+helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
+ 
+# Create namespace for `kafka`
+kubectl create ns kafka
+ 
+# Installs
+helm install --name scream-processing-kafka --set global.namespace=kafka incubator/kafka
+ 
+# Delete
+helm delete scream-processing-kafka
 ```
 
 # Project Setup
 
-## Setup Project /w sbt
+## From stratch /w sbt
 ```sh
 # Run following script ot clone starter repo
 bash <(curl https://flink.apache.org/q/sbt-quickstart.sh)
-
-#or
-git clone https://github.com/tillrohrmann/flink-project.git your-project-name-here
+```
+## Using boilerplate
+```sh
+# TODO:
 ```
 
 ## Project structure and dependencies
-### SBT build file
-```scala
- scalaVersion in ThisBuild := "2.11.7"
-
-val flinkVersion = "1.3.0"
-
-val flinkDependencies = Seq(
-  "org.apache.flink" %% "flink-scala" % flinkVersion % "provided",
-  "org.apache.flink" %% "flink-streaming-scala" % flinkVersion % "provided",
-  "org.apache.flink" % "flink-connector-elasticsearch2_2.10" % flinkVersion,
-  "org.apache.flink" % "flink-connector-kafka-0.10_2.10" % flinkVersion
-)
-
-// Joda time. (HACK)
-assemblyMergeStrategy in assembly := {
-  case PathList("org", "joda", "time", "base", "BaseDateTime.class") => MergeStrategy.first
-  case x =>
-    val oldStrategy = (assemblyMergeStrategy in assembly).value
-    oldStrategy(x)
-}
+```sh
+# TODO: boilerplate project will be shared
 ```
 
 ### Testing
@@ -174,12 +177,12 @@ _:warning: Kafka as datasource and Elasticsearch for output in my case_
 ### CI
 **Jenkinsfile will be shared soon**
 
-- Build Job
-- Run tests (using embedded kafka and embedded elasticsearch in my case)
-- Filter running jobs to get `current job id` using `Flink REST API`
+- [x]Build Job
+- [x]Run tests (using embedded kafka and embedded elasticsearch in my case)
+- [x] Filter running jobs to get `current job id` using `Flink REST API`
 ```sh
 curl http://localhost:8081 | ./jq '.jobs[] | select(.name == "Awesome Job") | .jid'
 ```
-- Cancel job with savepoint
-- Upload new `{Your Job name-version}.jar`
-- Run newly uploaded job by starting from previously saved savepoint
+- [x] Cancel job with savepoint
+- [x] Upload new `{Your Job name-version}.jar`
+- [x] Run newly uploaded job by starting from previously saved savepoint
