@@ -165,8 +165,8 @@ _:warning: Kafka as datasource and Elasticsearch for output in my case_
 ### CI
 **Jenkinsfile will be shared soon**
 
-- [x]Build Job
-- [x]Run tests (using embedded kafka and embedded elasticsearch in my case)
+- [x] Build Job
+- [x] Run tests (using embedded kafka and embedded elasticsearch in my case)
 - [x] Filter running jobs to get `current job id` using `Flink REST API`
 ```sh
 curl http://localhost:8081 | ./jq '.jobs[] | select(.name == "Awesome Job") | .jid'
