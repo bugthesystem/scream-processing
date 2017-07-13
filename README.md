@@ -31,11 +31,7 @@ Playground for Apache Kafka, Apache Flink (CEP, ML) Elasticsearch and Kibana in 
 - [Kubernetes](https://kubernetes.io/)
 - [Jenkins Pipelines](https://jenkins.io/doc/book/pipeline/)
 
-**_Kubernetes setup will be explained later on_**
-
-
-
-# Env Setup (Docker Compose)
+# Env Setup (Local)
 ## Install Kafka
 ```sh
 # TODO: convert to `docker-compose`
@@ -53,14 +49,6 @@ bin/kafka-server-start.sh config/server.properties
 
 # Create topic
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic scream-processing
-
-# 
-# To send message
-#
-bin/kafka-console-producer.sh --broker-list localhost:9092 --topic scream-processing
-
-# To consume message
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic scream-processing --from-beginning
 ```
 
 ## Install Flink
