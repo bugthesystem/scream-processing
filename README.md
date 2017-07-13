@@ -157,6 +157,7 @@ assemblyMergeStrategy in assembly := {
 ```
 
 ### Testing
+_:warning: Kafka as datasource and Elasticsearch for output in my case_
 
 - [x] Test Base using `LocalFlinkMiniCluster`
 
@@ -165,7 +166,7 @@ assemblyMergeStrategy in assembly := {
 - [x] Mocking Sink to store data and get back when processing completed
 
 #### Integration Testing
-_Kafka as datasource and Elasticsearch for output_
+
 - EmbeddedKafka
 - Embedded Elasticsearch (Test helpers will be provided)
 
