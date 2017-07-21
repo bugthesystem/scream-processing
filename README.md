@@ -19,16 +19,16 @@ Playground for Apache Kafka, Apache Flink (CEP, ML) Elasticsearch and Kibana in 
  - [Env Setup (Kubernetes)](#env-setup-kubernetes)
 
 # Tech / Tools
-- [Scala](https://www.scala-lang.org/)
-- [Sbt](http://www.scala-sbt.org/)
-- [Kafka](https://kafka.apache.org/)
-- [Flink](https://flink.apache.org/)
+- [Scala 2.11.7](https://www.scala-lang.org/)
+- [Sbt 0.13](http://www.scala-sbt.org/)
+- [Kafka 0.10](https://kafka.apache.org/)
+- [Flink 1.3.1](https://flink.apache.org/)
   - [FlinkCEP - Complex event processing for Flink](https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/libs/cep.html)
   - [FlinkML - FlinkML - Machine Learning for Flink](https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/libs/ml/index.html)
-- [Elasticsearch](https://www.elastic.co/products/elasticsearch)
-- [Kibana](https://www.elastic.co/products/kibana)
+- [Elasticsearch 5.5.0](https://www.elastic.co/products/elasticsearch)
+- [Kibana 5.5.0](https://www.elastic.co/products/kibana)
 - [Docker](https://www.docker.com/)
-- [Kubernetes](https://kubernetes.io/)
+- [Kubernetes 1.7](https://kubernetes.io/)
 - [Jenkins Pipelines](https://jenkins.io/doc/book/pipeline/)
 
 # Env Setup (Local)
@@ -53,10 +53,10 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 -
 
 ## Install Flink
 ```sh
-wget http://mirror.netinch.com/pub/apache/flink/flink-1.3.0/flink-1.3.0-bin-hadoop27-scala_2.11.tgz
+wget http://mirror.netinch.com/pub/apache/flink/flink-1.3.0/flink-1.3.1-bin-hadoop27-scala_2.11.tgz
 
 tar xzf flink-*.tgz   # Unpack the downloaded archive
-cd flink-1.3.0
+cd flink-1.3.1
 
 # Start Flink
 ./bin/start-local.sh
@@ -68,15 +68,15 @@ docker run -t -p 8081:8081 flink local
 ```
 
 ## Install ES/Kibana
-:warning: `Flink Elasticsearch connector` for `Elasticsearch 5` is missing in `Maven` repository atm.
+:warning: [Flink 1.3.0] `Flink Elasticsearch connector` for `Elasticsearch 5` is missing in `Maven` repository atm.
 
 ```sh
-#Elasticsearch 2.4.5
+#Elasticsearch 5.5.0
 docker run --name scream-processing-elasticsearch -p 9200:9200 -p 9300:9300 \
-           -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" -d elasticsearch:2.4.5
+           -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" -d elasticsearch:5.5.0
 
-# Kibana 4.6.4
-docker run --name scream-processing-kibana --link scream-processing-elasticsearch:elasticsearch -p 5601:5601 -d kibana:4.6.4
+# Kibana 5.5.0
+docker run --name scream-processing-kibana --link scream-processing-elasticsearch:elasticsearch -p 5601:5601 -d kibana:5.5.0
 ```
 
 # Env Setup (Kubernetes)
