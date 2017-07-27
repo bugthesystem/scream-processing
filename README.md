@@ -174,3 +174,14 @@ curl http://localhost:8081 | ./jq '.jobs[] | select(.name == "Awesome Job") | .j
 - [x] Cancel job with savepoint
 - [x] Upload new `{Your Job name-version}.jar`
 - [x] Run newly uploaded job by starting from previously saved savepoint
+
+### Warnings
+ - If you want to upload fat-jars and if you get `413` (Entity Too Large) add following annotations to your ingress.
+ 
+ ```yaml
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: <your max size>m
+    nginx.org/client-max-body-size: <your max size>m
+ ```
