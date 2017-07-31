@@ -169,7 +169,7 @@ _:warning: Kafka as datasource and Elasticsearch for output in my case_
 - [x] Run tests (using embedded kafka and embedded elasticsearch in my case)
 - [x] Filter running jobs to get `current job id` using `Flink REST API`
 ```sh
-curl http://localhost:8081 | ./jq '.jobs[] | select(.name == "Awesome Job") | .jid'
+curl http://localhost:8081 | ./jq '.jobs[] | select(.name | startswith("Awesome Job")) | .jid'
 ```
 - [x] Cancel job with savepoint
 - [x] Upload new `{Your Job name-version}.jar`
